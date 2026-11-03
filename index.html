@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ko" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FunBox Soft - Mobile App & Game Studio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Pretendard', sans-serif; }
+        .glass { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(12px); }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between selection:bg-indigo-500 selection:text-white">
+
+    <!-- 상단 네비게이션 -->
+    <header class="sticky top-0 z-50 glass border-b border-slate-800">
+        <div class="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center font-extrabold text-white">F</div>
+                <span class="text-xl font-bold tracking-tight text-white">FunBox Soft</span>
+            </div>
+            <nav class="flex gap-6 text-sm font-medium text-slate-300">
+                <a href="#apps" class="hover:text-indigo-400 transition">출시 앱</a>
+                <a href="#privacy" class="hover:text-indigo-400 transition">개인정보처리방침</a>
+                <a href="mailto:support@funboxsoft.com" class="hover:text-indigo-400 transition">문의하기</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 메인 컨텐츠 -->
+    <main class="max-w-5xl mx-auto px-6 py-16 space-y-24">
+
+        <!-- Hero 섹션 -->
+        <section class="text-center space-y-6 py-8">
+            <span class="px-3 py-1 text-xs font-semibold bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 rounded-full">
+                Indie Game & Utility Studio
+            </span>
+            <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight bg-gradient-to-r from-white via-slate-200 to-indigo-400 bg-clip-text text-transparent">
+                일상에 즐거움과 편리함을 더하는<br>모바일 경험
+            </h1>
+            <p class="text-slate-400 max-w-2xl mx-auto text-base md:text-lg">
+                FunBox Soft는 직관적인 유틸리티 앱과 몰입감 있는 2D·3D 캐주얼 게임을 개발하는 모바일 소프트웨어 스튜디오입니다.
+            </p>
+        </section>
+
+        <!-- 출시 앱 소개 (Apps) -->
+        <section id="apps" class="space-y-8">
+            <div class="border-b border-slate-800 pb-4">
+                <h2 class="text-2xl font-bold text-white">Our Applications</h2>
+                <p class="text-sm text-slate-400 mt-1">Google Play에서 FunBox Soft의 앱을 만나보세요.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6">
+                <!-- 앱 카드 1: 4사진 1단어 -->
+                <div class="p-6 rounded-2xl bg-slate-900/90 border border-slate-800 hover:border-indigo-500/50 transition flex flex-col justify-between space-y-6">
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-semibold px-2.5 py-1 bg-emerald-500/10 text-emerald-400 rounded-md">교육 / 퀴즈</span>
+                            <span class="text-xs text-slate-500">com.koreanword.fourpics</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-white">4사진 1단어: 초등 필수 낱말 퀴즈</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed">
+                            네 장의 사진을 보고 공통으로 연상되는 단어를 맞추는 두뇌 회전 어휘 퀴즈 게임입니다. 초등 필수 어휘력과 연상력을 재미있게 키워보세요.
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-slate-800/80 flex items-center justify-between text-sm">
+                        <a href="https://play.google.com/store/apps/details?id=com.koreanword.fourpics" target="_blank" class="font-semibold text-indigo-400 hover:text-indigo-300">
+                            Google Play 바로가기 →
+                        </a>
+                        <a href="/privacy/wordquiz.html" class="text-slate-400 hover:text-white underline underline-offset-4">
+                            개인정보처리방침
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 앱 카드 2: 3D 로또 번호 추첨기 -->
+                <div class="p-6 rounded-2xl bg-slate-900/90 border border-slate-800 hover:border-indigo-500/50 transition flex flex-col justify-between space-y-6">
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-semibold px-2.5 py-1 bg-purple-500/10 text-purple-400 rounded-md">엔터테인먼트 / 유틸리티</span>
+                            <span class="text-xs text-slate-500">3D Physics Simulation</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-white">3D 에어믹스 로또 추첨기</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed">
+                            실제 추첨기의 공기 역학과 3D 물리 엔진을 그대로 구현한 리얼 타임 번호 추첨 애플리케이션입니다.
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-slate-800/80 flex items-center justify-between text-sm">
+                        <span class="text-slate-500 font-medium">스토어 출시 및 업데이트 지원</span>
+                        <a href="/privacy/lotto.html" class="text-slate-400 hover:text-white underline underline-offset-4">
+                            개인정보처리방침
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 개인정보처리방침 허브 안내 (구글 크롤러 및 사용자 안내용) -->
+        <section id="privacy" class="p-6 rounded-2xl bg-slate-900/50 border border-slate-800/80 space-y-4">
+            <h2 class="text-lg font-bold text-white">앱별 개인정보처리방침 (Privacy Policy)</h2>
+            <p class="text-sm text-slate-400">
+                FunBox Soft는 사용자의 개인정보를 소중히 다루며, 구글 플레이 스토어 정책을 준수합니다. 각 앱의 상세 개인정보처리방침은 아래 링크에서 확인하실 수 있습니다.
+            </p>
+            <ul class="text-sm text-indigo-400 space-y-2 list-disc list-inside">
+                <li><a href="/privacy/wordquiz.html" class="hover:underline">4사진 1단어: 초등 필수 낱말 퀴즈 개인정보처리방침</a></li>
+                <li><a href="/privacy/lotto.html" class="hover:underline">3D 로또 추첨기 개인정보처리방침</a></li>
+            </ul>
+        </section>
+
+    </main>
+
+    <!-- 하단 푸터 -->
+    <footer class="border-t border-slate-900 bg-slate-950 py-8 text-center text-xs text-slate-500 space-y-2">
+        <p class="font-semibold text-slate-400">FunBox Soft</p>
+        <p>문의 이메일: support@funboxsoft.com | <a href="/app-ads.txt" class="hover:text-slate-300 underline">app-ads.txt</a></p>
+        <p>© 2026 FunBox Soft. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
