@@ -4,22 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FunBox Soft - Mobile App & Game Studio</title>
+    <!-- 1. 브라우저 탭 파비콘 등록 -->
+    <link rel="icon" type="image/png" href="logo.png">
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Pretendard', sans-serif; }
         .glass { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(12px); }
+        /* 메인 로고 뒤 은은한 네온 발광 효과 */
+        .logo-glow {
+            filter: drop-shadow(0 0 25px rgba(59, 130, 246, 0.35));
+        }
     </style>
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between selection:bg-indigo-500 selection:text-white">
 
     <!-- 상단 네비게이션 -->
     <header class="sticky top-0 z-50 glass border-b border-slate-800">
-        <div class="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="flex items-center gap-2">
-                <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center font-extrabold text-white">F</div>
-                <span class="text-xl font-bold tracking-tight text-white">FunBox Soft</span>
-            </div>
+        <div class="max-w-5xl mx-auto px-6 py-3.5 flex justify-between items-center">
+            
+            <!-- 2. 상단 헤더 로고 교체 -->
+            <a href="#" class="flex items-center gap-3 group">
+                <img src="logo.png" alt="FunBox Soft Logo" class="w-9 h-9 object-contain drop-shadow transition-transform group-hover:scale-105">
+                <span class="text-xl font-bold tracking-tight text-white group-hover:text-indigo-300 transition">FunBox Soft</span>
+            </a>
+
             <nav class="flex gap-6 text-sm font-medium text-slate-300">
                 <a href="#apps" class="hover:text-indigo-400 transition">출시 앱</a>
                 <a href="#privacy" class="hover:text-indigo-400 transition">개인정보처리방침</a>
@@ -29,20 +39,29 @@
     </header>
 
     <!-- 메인 컨텐츠 -->
-    <main class="max-w-5xl mx-auto px-6 py-16 space-y-24">
+    <main class="max-w-5xl mx-auto px-6 py-12 md:py-16 space-y-24">
 
-        <!-- Hero 섹션 -->
-        <section class="text-center space-y-6 py-8">
-            <span class="px-3 py-1 text-xs font-semibold bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 rounded-full">
+        <!-- 3. Hero 섹션 (메인 로고 심볼 배치) -->
+        <section class="text-center space-y-6 py-6 flex flex-col items-center">
+            
+            <!-- 메인 중앙 로고 -->
+            <div class="relative mb-2">
+                <div class="absolute inset-0 bg-indigo-500/20 blur-2xl rounded-full scale-125"></div>
+                <img src="logo.png" alt="FunBox Soft Emblem" class="w-28 h-28 md:w-36 md:h-36 object-contain relative logo-glow">
+            </div>
+
+            <span class="px-3.5 py-1 text-xs font-semibold bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 rounded-full tracking-wide">
                 Indie Game & Utility Studio
             </span>
-            <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight bg-gradient-to-r from-white via-slate-200 to-indigo-400 bg-clip-text text-transparent">
+            <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight bg-gradient-to-r from-white via-slate-200 to-indigo-300 bg-clip-text text-transparent leading-tight">
                 일상에 즐거움과 편리함을 더하는<br>모바일 경험
             </h1>
-            <p class="text-slate-400 max-w-2xl mx-auto text-base md:text-lg">
+            <p class="text-slate-400 max-w-2xl mx-auto text-base md:text-lg leading-relaxed">
                 FunBox Soft는 직관적인 유틸리티 앱과 몰입감 있는 2D·3D 캐주얼 게임을 개발하는 모바일 소프트웨어 스튜디오입니다.
             </p>
         </section>
+
+        <!-- (이하 앱 목록 및 푸터는 기존 코드 유지) -->
 
         <!-- 출시 앱 소개 (Apps) -->
         <section id="apps" class="space-y-8">
