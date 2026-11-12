@@ -3,50 +3,86 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>로또 QR 당첨 확인</title>
-  <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+  <title>로또 6/45 QR 당첨 확인</title>
   <style>
     body {
-      margin: 0; padding: 20px; background: #0f172a; color: #f8fafc;
+      margin: 0; padding: 20px; background: #0b0f19; color: #f8fafc;
       font-family: -apple-system, BlinkMacSystemFont, "Malgun Gothic", sans-serif;
       display: flex; flex-direction: column; align-items: center; justify-content: center;
-      min-height: 90vh; text-align: center;
+      min-height: 92vh; text-align: center;
     }
-    h2 { color: #f6cb67; margin-bottom: 8px; }
-    p { color: #cbd5e1; font-size: 15px; margin-bottom: 20px; }
-    #reader {
-      width: 100%; max-width: 400px; border-radius: 16px; overflow: hidden;
-      border: 2px solid #f6cb67; background: #000;
+    h2 { color: #f6cb67; margin: 0 0 8px 0; font-size: 22px; }
+    p { color: #cbd5e1; font-size: 14px; margin: 0 0 18px 0; }
+    .cam-box {
+      position: relative; width: 100%; max-width: 380px; aspect-ratio: 1 / 1;
+      border-radius: 18px; overflow: hidden; border: 2px solid #f6cb67; background: #000;
+    }
+    video { width: 100%; height: 100%; object-fit: cover; }
+    .guide {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      width: 55%; height: 55%; border: 2px dashed rgba(246, 203, 103, 0.85);
+      border-radius: 12px; box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.45); pointer-events: none;
     }
     #status { margin-top: 16px; font-size: 14px; color: #94a3b8; }
   </style>
 </head>
 <body>
-  <h2>🎰 로또 6/45 QR 당첨 확인</h2>
-  <p>로또 용지 상단의 QR 코드를 사각형 안에 비춰주세요.</p>
-  <div id="reader"></div>
-  <div id="status">후면 카메라를 준비하고 있습니다...</div>
+  <h2>🎰 로또 QR 당첨 확인</h2>
+  <p>사각형 안에 로또 용지의 QR 코드를 가까이 비춰주세요.</p>
+  <div class="cam-box">
+    <video id="video" playsinline autoplay muted></video>
+    <div class="guide"></div>
+  </div>
+  <div id="status">고화질 후면 카메라를 켜는 중...</div>
 
   <script>
+    const video = document.getElementById("video");
     const statusEl = document.getElementById("status");
-    const html5QrCode = new Html5Qrcode("reader");
+    let scanning = true;
 
-    // 후면 카메라(environment) 강제 지정
-    html5QrCode.start(
-      { facingMode: "environment" },
-      { fps: 10, qrbox: { width: 240, height: 240 } },
-      (decodedText) => {
-        statusEl.innerText = "인식 완료! 당첨 결과 페이지로 이동합니다...";
-        html5QrCode.stop().then(() => {
-          window.location.href = decodedText;
+    async function startScanner() {
+      try {
+        // 1. 후면 카메라 + FHD 해상도 + 연속 자동초점 요청
+        const stream = await navigator.mediaDevices.getUserMedia({
+          video: {
+            facingMode: { ideal: "environment" },
+            width: { ideal: 1920 },
+            height: { ideal: 1080 },
+            advanced: [{ focusMode: "continuous" }]
+          },
+          audio: false
         });
-      },
-      () => {}
-    ).then(() => {
-      statusEl.innerText = "후면 카메라 작동 중 (QR 코드를 비춰주세요)";
-    }).catch((err) => {
-      statusEl.innerText = "카메라 권한을 허용해 주세요: " + err;
-    });
+        video.srcObject = stream;
+        await video.play();
+        statusEl.innerText = "인식 대기 중 (10~15cm 거리에서 비춰주세요)";
+
+        // 2. 안드로이드 크롬/삼성인터넷 내장 하드웨어 QR 감지기 사용
+        if ("BarcodeDetector" in window) {
+          const detector = new BarcodeDetector({ formats: ["qr_code"] });
+          const scanLoop = async () => {
+            if (!scanning) return;
+            try {
+              const barcodes = await detector.detect(video);
+              if (barcodes.length > 0 && barcodes[0].rawValue) {
+                scanning = false;
+                const url = barcodes[0].rawValue;
+                statusEl.innerText = "✅ 인식 완료! 당첨 결과로 이동합니다...";
+                stream.getTracks().forEach(t => t.stop());
+                window.location.href = url;
+                return;
+              }
+            } catch (e) {}
+            requestAnimationFrame(scanLoop);
+          };
+          requestAnimationFrame(scanLoop);
+        } else {
+          statusEl.innerText = "이 브라우저는 내장 QR 감지를 지원하지 않습니다. 크롬 또는 삼성 인터넷으로 열어주세요.";
+        }
+      } catch (err) {
+        statusEl.innerText = "카메라 권한을 허용해 주세요: " + err.message;
+      }
+    }
+    startScanner();
   </script>
 </body>
 </html>
